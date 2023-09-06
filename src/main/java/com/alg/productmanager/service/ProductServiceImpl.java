@@ -21,8 +21,10 @@ public class ProductServiceImpl implements ProductService {
 
   public Product find(Long id) throws ProductDoesNotExistException {
 
+    // get product from db
     Product product = productRepository.findProductById(id);
 
+    // throw exception if it does not exist
     if (product == null) {
       throw new ProductDoesNotExistException(GenericError.PRDOUCT_DOES_NOT_EXIST, id);
     }
@@ -32,16 +34,19 @@ public class ProductServiceImpl implements ProductService {
 
   public Product edit(Long id, ProductDto productDto) throws ProductDoesNotExistException {
 
+    // get product from db
     Product existingProduct = productRepository.findProductById(id);
 
     if (existingProduct == null) {
       throw new ProductDoesNotExistException(GenericError.PRDOUCT_DOES_NOT_EXIST, id);
     }
 
+    // transfer dto properties to existing product
     existingProduct.setName(productDto.getName());
     existingProduct.setDescription(productDto.getDescription());
     existingProduct.setName(productDto.getName());
 
+    // save updated product
     productRepository.save(existingProduct);
 
     return existingProduct;
@@ -49,12 +54,15 @@ public class ProductServiceImpl implements ProductService {
 
   public void delete(Long id) throws ProductDoesNotExistException {
 
+    // get product from db
     Product existingProduct = productRepository.findProductById(id);
 
+    // throw exception if it does not exist
     if (existingProduct == null) {
       throw new ProductDoesNotExistException(GenericError.PRDOUCT_DOES_NOT_EXIST, id);
     }
 
+    // delete the product
     productRepository.deleteById(id);
   }
 }

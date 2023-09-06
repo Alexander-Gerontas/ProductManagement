@@ -5,7 +5,7 @@ import com.alg.productmanager.objects.entities.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-/** Converts Product DTOs to domain objects and vice versa. */
+/** Converts Product DTOs to domain objects. */
 @Component
 @RequiredArgsConstructor
 public class ProductConverter {

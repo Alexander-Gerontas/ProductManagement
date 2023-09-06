@@ -23,6 +23,8 @@ public class ProductController {
     @PostMapping(value = "/add", produces = "application/json")
     public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto) {
 
+        log.info("Creating new product with name: " + productDto.getName());
+
         var product = productConverter.toEntity(productDto);
         product = productService.add(product);
 
@@ -31,6 +33,8 @@ public class ProductController {
 
     @GetMapping(value = "get/{id}", produces = "application/json")
     public ResponseEntity<Product> getProduct(@PathVariable Long id) throws ProductDoesNotExistException {
+
+        log.info("Searching for product with id: " + id);
 
         try {
             var product = productService.find(id);
@@ -44,6 +48,8 @@ public class ProductController {
     @PutMapping(value = "/edit/{id}", produces = "application/json")
     public ResponseEntity<Product> editProductForm(@PathVariable Long id, @RequestBody ProductDto productDto) {
 
+        log.info("Altering product with id: " + id);
+
         try {
             var existingProduct = productService.edit(id, productDto);
             return new ResponseEntity<>(existingProduct, HttpStatus.OK);
@@ -54,6 +60,8 @@ public class ProductController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+
+        log.info("Deleting product with id: " + id);
 
         try {
             productService.delete(id);

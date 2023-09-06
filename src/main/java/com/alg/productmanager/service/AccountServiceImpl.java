@@ -19,11 +19,15 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public Account accountRegistration(AccountDto dto) throws AccountExistsException {
 
+    // search for account with the same username
     var existingAccount = accountRepository.findByUsername(dto.getUsername());
 
+    // if an account already exists throw exception
     if (existingAccount != null) {
       throw new AccountExistsException(GenericError.ACCOUNT_WITH_SAME_USERNAME_EXISTS, dto.getUsername());
     }
+
+    // create a new account if not
     var newAccount = accountConverter.toAccount(dto);
     newAccount = accountRepository.save(newAccount);
 
