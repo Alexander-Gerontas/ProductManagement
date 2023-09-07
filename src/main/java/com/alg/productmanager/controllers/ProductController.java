@@ -5,6 +5,7 @@ import com.alg.productmanager.objects.entities.Product;
 import com.alg.productmanager.service.ProductService;
 import com.alg.productmanager.converters.ProductConverter;
 import com.alg.productmanager.exceptions.ProductDoesNotExistException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class ProductController {
     private final ProductConverter productConverter;
 
     @PostMapping(value = "/add", produces = "application/json")
-    public ResponseEntity<Product> addProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<Product> addProduct(@RequestBody @Valid ProductDto productDto) {
 
         log.info("Creating new product with name: " + productDto.getName());
 
@@ -36,38 +37,24 @@ public class ProductController {
 
         log.info("Searching for product with id: " + id);
 
-        try {
-            var product = productService.find(id);
-            return new ResponseEntity<>(product, HttpStatus.OK);
-        }
-        catch (ProductDoesNotExistException e) {
-            return ResponseEntity.notFound().build();
-        }
+        var product = productService.find(id);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PutMapping(value = "/edit/{id}", produces = "application/json")
-    public ResponseEntity<Product> editProductForm(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    public ResponseEntity<Product> editProductForm(@PathVariable Long id, @RequestBody @Valid ProductDto productDto) throws ProductDoesNotExistException {
 
         log.info("Altering product with id: " + id);
 
-        try {
-            var existingProduct = productService.edit(id, productDto);
-            return new ResponseEntity<>(existingProduct, HttpStatus.OK);
-        } catch (ProductDoesNotExistException e) {
-            return ResponseEntity.notFound().build();
-        }
+        var existingProduct = productService.edit(id, productDto);
+        return new ResponseEntity<>(existingProduct, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
-
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) throws ProductDoesNotExistException {
         log.info("Deleting product with id: " + id);
 
-        try {
-            productService.delete(id);
-            return ResponseEntity.ok().body("product with id: " + id + " deleted");
-        } catch (ProductDoesNotExistException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        productService.delete(id);
+        return ResponseEntity.ok().body("product with id: " + id + " deleted");
     }
 }
