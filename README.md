@@ -51,7 +51,7 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    mvn spring-boot:run
    ```
-5. Visit http://localhost:8080/swagger-ui/index.html to check documentation
+5. Visit `http://localhost:8080/swagger-ui/index.html` to check documentation
 
 6. Setup an API development platform like Postman to send http requests to the application.
 
