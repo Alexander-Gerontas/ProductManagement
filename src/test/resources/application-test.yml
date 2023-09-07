@@ -18,7 +18,3 @@ spring:
         batch_versioned_data: true
         format_sql: false
         generate_statistics: false
-
-  liquibase:
-    change-log: classpath:/changelog/db.changelog-master.xml
-    enabled: true
