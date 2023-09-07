@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AccountControllerIT extends BaseIntegrationTest {
+class RegistrationControllerIT extends BaseIntegrationTest {
 
   private MockMvc mockMvc;
   @Autowired private WebApplicationContext webApplicationContext;
