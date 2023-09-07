@@ -7,11 +7,18 @@ The project is designed with security in mind, including password hashing and ac
 
 ## Table of Contents
 
+- [Tech Stack](#tech-stack)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
+
+## Tech Stack
+
+- Java 17
+- Spring 3.0.2
+- Postgres 15.3
 
 ## Features
 
