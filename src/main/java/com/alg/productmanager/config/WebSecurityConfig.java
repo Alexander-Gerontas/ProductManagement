@@ -23,16 +23,15 @@ public class WebSecurityConfig {
 
         http.csrf()
                 .disable()
-                .authorizeHttpRequests(request ->
-                        request
-                                .requestMatchers("/api/v1/account").permitAll()
-                                .requestMatchers("/api/v1/account/registration").permitAll()
-                                .requestMatchers("/api/v1/account/login").permitAll()
-                                .requestMatchers("/api/v1/product/add").hasAuthority(USER.getLiteral())
-                                .requestMatchers("/api/v1/product/get/{id}").hasAuthority(USER.getLiteral())
-                                .requestMatchers("/api/v1/product/edit/{id}").hasAuthority(ADMIN.getLiteral())
-                                .requestMatchers("/api/v1/product/delete/{id}").hasAuthority(ADMIN.getLiteral())
-                                .anyRequest().authenticated()
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/v1/account").permitAll()
+                        .requestMatchers("/api/v1/account/registration").permitAll()
+                        .requestMatchers("/api/v1/product/add").hasAuthority(USER.getLiteral())
+                        .requestMatchers("/api/v1/product/get/{id}").hasAuthority(USER.getLiteral())
+                        .requestMatchers("/api/v1/product/edit/{id}").hasAuthority(ADMIN.getLiteral())
+                        .requestMatchers("/api/v1/product/delete/{id}").hasAuthority(ADMIN.getLiteral())
+                        .anyRequest().authenticated()
                 )
                 .httpBasic();
 
