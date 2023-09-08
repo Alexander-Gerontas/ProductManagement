@@ -8,8 +8,10 @@ import com.alg.productmanager.objects.entities.Account;
 import com.alg.productmanager.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
