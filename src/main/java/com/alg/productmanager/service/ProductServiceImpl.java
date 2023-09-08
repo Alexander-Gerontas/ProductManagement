@@ -1,14 +1,16 @@
 package com.alg.productmanager.service;
 
+import com.alg.productmanager.exceptions.GenericError;
+import com.alg.productmanager.exceptions.ProductDoesNotExistException;
 import com.alg.productmanager.objects.dtos.ProductDto;
 import com.alg.productmanager.objects.entities.Product;
 import com.alg.productmanager.repository.ProductRepository;
-import com.alg.productmanager.exceptions.GenericError;
-import com.alg.productmanager.exceptions.ProductDoesNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
