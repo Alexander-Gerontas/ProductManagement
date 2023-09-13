@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CustomUserDetailsImpl implements UserDetails {
 
-    private Account account;
+    private final Account account;
 
     public CustomUserDetailsImpl(Account account) {
         super();
